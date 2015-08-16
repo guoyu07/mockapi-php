@@ -56,7 +56,7 @@ Modify `$NGINX_HOME/conf/nginx.conf`.
         include        fastcgi_params;
     }
 ### Apache config
-Modify `$APACHE_HOME/conf/httpd.conf`.
+Modify `$APACHE_HOME/conf/httpd.conf`.  
 First you should enable Mod Rewrite module . Just remove '#' for this line:
 
     LoadModule rewrite_module modules/mod_rewrite.so
