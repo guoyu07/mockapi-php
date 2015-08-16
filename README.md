@@ -63,7 +63,7 @@ First you should enable Mod Rewrite module . Just remove '#' for this line:
 
 Second you shoud enable set `AllowOverride All` for mockapi directory.
 
-    <Directory "D:/sites/example/">
+    <Directory "d:/wamp/www/">
         Options Indexes FollowSymLinks
         AllowOverride All
         Order allow,deny
