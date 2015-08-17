@@ -17,4 +17,8 @@ class Rule extends Collection{
      * @var array
      */
     public $groups;
+    /**
+     * @var array
+     */
+    public $res;
 }
