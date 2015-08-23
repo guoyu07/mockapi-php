@@ -6,9 +6,7 @@ class IndexController extends Controller
 
     public function indexAction()
     {
-        //echo "<h1>Hello!</h1>";
-        //$params = array_merge($_GET, $_POST);
-        $url=$_SERVER['DOCUMENT_URI'];
+        $url = explode('?', $_SERVER['REQUEST_URI'])[0];
         $rules = Rule::find(array(
             array(
                 'url'=> $url,
@@ -23,7 +21,10 @@ class IndexController extends Controller
                 }
             }
         }else{
-            echo '{"error":1, "msg":"can\'t match any url"}';
+            echo json_encode(array(
+                'error' => 1,
+                'msg' => 'can\'t match any url for [' . $url . ']',
+            ));
         }
     }
 }

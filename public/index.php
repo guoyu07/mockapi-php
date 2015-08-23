@@ -2,6 +2,7 @@
 use Phalcon\Loader;
 use Phalcon\Mvc\Application;
 use Phalcon\DI\FactoryDefault;
+use Phalcon\Mvc\Router;
 
 define('APP_PATH', realpath('..') . '/');
 
@@ -19,6 +20,25 @@ try {
     $di = new FactoryDefault();
     // Register Services
     ServiceConfig::register($di);
+    $di->set('router', function(){
+        // Create the router without default routes
+        $router = new Router(false);
+        $router->add(
+            "/",
+            array(
+                'controller' => 'index',
+                'action'     => 'index'
+            )
+        );
+        // Set 404 paths
+        $router->notFound(
+            array(
+                "controller" => "index",
+                "action"     => "index"
+            )
+        );
+        return $router;
+    });
     // Handle the request
     $application = new Application($di);
 
