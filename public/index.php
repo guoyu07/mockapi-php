@@ -30,7 +30,6 @@ try {
                 'action'     => 'index'
             )
         );
-        // Set 404 paths
         $router->notFound(
             array(
                 "controller" => "index",
