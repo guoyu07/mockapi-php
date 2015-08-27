@@ -1,7 +1,6 @@
 <?php
-use Phalcon\Mvc\Controller;
 
-class RuleController extends Controller
+class RuleController extends BaseController
 {
 
     public function indexAction()
@@ -9,23 +8,32 @@ class RuleController extends Controller
         echo 'hello';
     }
 
-    public function listAction($params=null)
+    public function listAction()
     {
-        echo 'list ';
+        $pageService = new ListRulePageService($this->request, $this->response);
+        $pageService->execute();
+        $this->render($pageService);
     }
 
-    public function addAction($params=null)
+    public function addAction()
     {
-        echo 'add ' . var_export($params, true);
+        $pageService = new AddRulePageService($this->request, $this->response);
+        $pageService->execute();
+        $this->render($pageService);
     }
 
-    public function removeAction($params=null)
+    public function modifyAction()
     {
-        echo 'remove ' . var_export($params, true);
+        $pageService = new ModifyRulePageService($this->request, $this->response);
+        $pageService->execute();
+        $this->render($pageService);
+
     }
 
-    public function modifyAction($params=null)
+    public function removeAction()
     {
-        echo 'modify ' . var_export($params, true);
+        $pageService = new RemoveRulePageService($this->request, $this->response);
+        $pageService->execute();
+        $this->render($pageService);
     }
 }

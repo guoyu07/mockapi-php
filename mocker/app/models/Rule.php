@@ -21,4 +21,8 @@ class Rule extends Collection{
      * @var array
      */
     public $res;
+    /**
+     * @var string
+     */
+    public $tag;
 }

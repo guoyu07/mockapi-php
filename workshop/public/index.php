@@ -13,6 +13,8 @@ try {
         APP_PATH . 'app/controllers/',
         APP_PATH . 'app/models/',
         APP_PATH . 'app/conf/',
+        APP_PATH . 'app/lib/',
+        APP_PATH . 'app/service/page',
     ))->register();
 
     // Create a DI

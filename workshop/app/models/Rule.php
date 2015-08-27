@@ -1,9 +1,9 @@
 <?php
-use Phalcon\Mvc\Collection;
 /**
  * Class Rule 规则模型
  */
-class Rule extends Collection{
+class Rule extends BaseModel
+{
     public $_id;
     /**
      * @var string
@@ -21,4 +21,9 @@ class Rule extends Collection{
      * @var array
      */
     public $res;
+    /**
+     * @var string
+     */
+    public $tag;
+
 }
