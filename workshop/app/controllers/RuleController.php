@@ -36,4 +36,24 @@ class RuleController extends BaseController
         $pageService->execute();
         $this->render($pageService);
     }
+
+    public function saveRuleConditionAction()
+    {
+        $pageService = new SaveRuleConditionPageService($this->request, $this->response);
+        $pageService->execute();
+        $this->render($pageService);
+    }
+
+    public function removeRuleConditionAction()
+    {
+        $pageService = new RemoveRuleConditionPageService($this->request, $this->response);
+        $pageService->execute();
+        $this->render($pageService);
+    }
+
+    public function testAction(){
+        $pageService = new TestRulePageService($this->request, $this->response);
+        $pageService->execute();
+        $this->render($pageService);
+    }
 }

@@ -7,13 +7,13 @@ class RemoveRulePageService extends JsonPageService
     protected function getParamRules()
     {
         return array(
-            'id' => self::PARAM_RULE_REQUIRED,
+            '_id' => self::PARAM_RULE_REQUIRED,
         );
     }
 
     protected function doExecute()
     {
-        $rule = Rule::findById($this->get('id'));
+        $rule = Rule::findById($this->get('_id'));
         if($rule){
             $ret = $rule->delete();
             if($ret){

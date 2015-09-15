@@ -10,7 +10,7 @@ class AddRulePageService extends JsonPageService
     {
         $rule = Rule::create($this->get('rule'));
         $this->beforeSave($rule);
-        $ret = $rule->save($rule);
+        $ret = $rule->save();
         if ($ret) {
             return $this->success($ret);
         } else {

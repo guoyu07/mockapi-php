@@ -19,6 +19,7 @@ class IndexController extends Controller
                 }else{
                     echo $rule->res;
                 }
+                break;
             }
         }else{
             echo json_encode(array(
@@ -27,4 +28,5 @@ class IndexController extends Controller
             ));
         }
     }
+
 }

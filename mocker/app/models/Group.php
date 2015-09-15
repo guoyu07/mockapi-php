@@ -1,9 +1,8 @@
 <?php
-use Phalcon\Mvc\Collection;
 /**
  * Class Group 分组模型
  */
-class Group extends Collection{
+class Group extends BaseModel{
     /**
      * @var string
      */
