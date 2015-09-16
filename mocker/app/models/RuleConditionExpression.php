@@ -20,7 +20,8 @@ class RuleConditionExpression extends ObjectModel
     const OPERATOR_IS_NOT_SET = '!ISSET';
     const OPERATOR_IN = 'IN';
     const OPERATOR_NOT_IN = '!IN';
-    const OPERATOR_NOT_CONTAIN = 'CONTAIN';
+    const OPERATOR_CONTAIN = 'CONTAIN';
+    const OPERATOR_NOT_CONTAIN = '!CONTAIN';
 
     /**
      * @var string
@@ -29,11 +30,11 @@ class RuleConditionExpression extends ObjectModel
     /**
      * @var string
      */
-    public $key;
+    public $left;
     /**
      * @var string|number|array|null
      */
-    public $value;
+    public $right;
     /**
      * @var string
      */

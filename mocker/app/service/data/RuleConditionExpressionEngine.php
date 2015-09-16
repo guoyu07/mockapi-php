@@ -4,6 +4,7 @@
  */
 class RuleConditionExpressionEngine
 {
+
     /**
      * @var array
      */
@@ -25,18 +26,56 @@ class RuleConditionExpressionEngine
             throw new MockApiException("unsupported condition operator '" . $operator . '"', ErrorInfo::UNSUPPORTED_CONDITION_OPERATOR);
         }
         $exp = new Expression();
-        $exp->setLeft($context[$rce->key]);
-        $exp->setRight($rce->value);
+        $exp->setLeft($this->getOperandValue($rce->left));
+        $exp->setRight($this->getOperandValue($rce->right));
         $exp->setOperator($operator);
         return $evaluator->evaluate($exp);
     }
 
-    protected function initialize(){
-
+    /**
+     * @param RuleConditionExpressionOperand $operand
+     * @param array $context
+     * @return null
+     */
+    private function getOperandValue($operand, $context){
+        if(isset($operand)){
+            if($operand->isVariable){
+                return $context[$operand->value];
+            }
+            return $operand->value;
+        }
+        return null;
     }
 
-    public function registerEvaluator($operator, $evaluator){
-        $this->evaluators[$operator] = $evaluator;
+    protected function initialize(){
+        if(empty(self::$evaluators)){
+            $evaluators = array(
+                new EqualEvaluator(),
+                new NotEqualEvaluator(),
+                new GraterEvaluator(),
+                new GraterEqualEvaluator(),
+                new LessEvaluator(),
+                new LessEqualEvaluator(),
+                new EmptyEvaluator(),
+                new NotEmptyEvaluator(),
+                new IssetEvaluator(),
+                new IsNotSetEvaluator(),
+                new InEvaluator(),
+                new NotInEvaluator(),
+                new ContainEvaluator(),
+                new NotContainEvaluator(),
+            );
+            foreach($evaluators as $evaluator){
+                $this->registerEvaluator($evaluator);
+            }
+        }
+    }
+
+    /**
+     * @param IExpressionEvaluator $evaluator
+     */
+    public function registerEvaluator($evaluator){
+        $this->evaluators[$evaluator->getOperator()] = $evaluator;
     }
 
     /**

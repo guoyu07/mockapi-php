@@ -9,4 +9,9 @@ interface IExpressionEvaluator
      * @return mixed
      */
     public function evaluate($expression);
+
+    /**
+     * @return string
+     */
+    public function getOperator();
 }

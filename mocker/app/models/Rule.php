@@ -50,7 +50,14 @@ class Rule extends BaseModel
                 $ruleCondition = RuleCondition::create($rc);
                 if(is_array($ruleCondition->expressions)){
                     foreach($ruleCondition->expressions as $idxExp => $exp){
-                        $ruleCondition->expressions[$idxExp] = RuleConditionExpression::create($exp);
+                        $rce = RuleConditionExpression::create($exp);
+                        if(is_array($rce->left)){
+                            $rce->left = RuleConditionExpressionOperand::create($rce->left);
+                        }
+                        if(is_array($rce->right)){
+                            $rce->right = RuleConditionExpressionOperand::create($rce->right);
+                        }
+                        $ruleCondition->expressions[$idxExp] =$rce;
                     }
                 }
                 $rule->conditions[$idx] = $ruleCondition;
