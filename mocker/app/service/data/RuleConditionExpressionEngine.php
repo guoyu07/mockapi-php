@@ -16,30 +16,34 @@ class RuleConditionExpressionEngine
 
     /**
      * @param RuleConditionExpression $rce
-     * @param array $context
+     * @param array $contextMap
      * @return mixed
      */
-    function evaluate($rce, $context){
+    function evaluate($rce, $contextMap){
         $operator = strtoupper($rce->operator);
         $evaluator = $this->getEvaluator($operator);
         if(!$evaluator){
             throw new MockApiException("unsupported condition operator '" . $operator . '"', ErrorInfo::UNSUPPORTED_CONDITION_OPERATOR);
         }
         $exp = new Expression();
-        $exp->setLeft($this->getOperandValue($rce->left));
-        $exp->setRight($this->getOperandValue($rce->right));
+        $exp->setLeft($this->getOperandValue($rce->left, $contextMap));
+        $exp->setRight($this->getOperandValue($rce->right, $contextMap));
         $exp->setOperator($operator);
         return $evaluator->evaluate($exp);
     }
 
     /**
      * @param RuleConditionExpressionOperand $operand
-     * @param array $context
+     * @param array $contextMap
      * @return null
      */
-    private function getOperandValue($operand, $context){
+    private function getOperandValue($operand, $contextMap){
         if(isset($operand)){
             if($operand->isVariable){
+                $context = $contextMap[$operand->contextType];
+                if(!isset($context)){
+                    throw new MockApiException("unsupported context type '" . $operand->contextType . '"', ErrorInfo::UNSUPPORTED_CONTEXT_TYPE);
+                }
                 return $context[$operand->value];
             }
             return $operand->value;
@@ -48,7 +52,7 @@ class RuleConditionExpressionEngine
     }
 
     protected function initialize(){
-        if(empty(self::$evaluators)){
+        if(empty($this->evaluators)){
             $evaluators = array(
                 new EqualEvaluator(),
                 new NotEqualEvaluator(),

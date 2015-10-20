@@ -7,7 +7,12 @@ class TestRulePageService extends JsonPageService
 
     protected function doExecute()
     {
-        return $this->saveRule();
+        return $this->findRule();
+    }
+
+    private function findRule(){
+        $rule = Rule::findById($this->getRequest()->get('_id'));
+        return $this->success($rule);
     }
 
     private function saveRule(){
@@ -25,13 +30,13 @@ class TestRulePageService extends JsonPageService
         $rc1->logicType = RuleCondition::LOGIC_TYPE_AND;
 
         $rce1 = new RuleConditionExpression();
-        $rce1->conditionType = RuleConditionExpression::CONDITION_TYPE_PARAM;
+        $rce1->contextType = RuleConditionExpressionOperand::CONTEXT_TYPE_REQUEST;
         $rce1->key = 'name';
         $rce1->value = 'Lily';
         $rce1->operator = RuleConditionExpression::OPERATOR_EQUAL;
 
         $rce2 = new RuleConditionExpression();
-        $rce2->conditionType = RuleConditionExpression::CONDITION_TYPE_PARAM;
+        $rce2->contextType = RuleConditionExpressionOperand::CONTEXT_TYPE_REQUEST;
         $rce2->key = 'age';
         $rce2->value = 10;
         $rce2->operator = RuleConditionExpression::OPERATOR_GRATER;
@@ -47,12 +52,12 @@ class TestRulePageService extends JsonPageService
         $rc2->logicType = RuleCondition::LOGIC_TYPE_OR;
 
         $rce3 = new RuleConditionExpression();
-        $rce3->conditionType = RuleConditionExpression::CONDITION_TYPE_HEADER;
+        $rce3->contextType = RuleConditionExpressionOperand::CONTEXT_TYPE_HEADER;
         $rce3->key = 'WITH_XML_HTTP_REQUEST';
         $rce3->operator = RuleConditionExpression::OPERATOR_IS_SET;
 
         $rce4 = new RuleConditionExpression();
-        $rce4->conditionType = RuleConditionExpression::CONDITION_TYPE_PARAM;
+        $rce4->contextType = RuleConditionExpressionOperand::CONTEXT_TYPE_REQUEST;
         $rce4->key = 'agent';
         $rce4->value = "MSIE";
         $rce4->operator = RuleConditionExpression::OPERATOR_NOT_CONTAIN;

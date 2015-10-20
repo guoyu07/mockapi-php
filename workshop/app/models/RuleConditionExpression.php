@@ -5,9 +5,6 @@
  */
 class RuleConditionExpression extends ObjectModel
 {
-    const CONDITION_TYPE_PARAM = 'param';
-    const CONDITION_TYPE_HEADER = 'header';
-
     const OPERATOR_EQUAL = '==';
     const OPERATOR_NOT_EQUAL = '!=';
     const OPERATOR_GRATER = '>';
@@ -20,20 +17,17 @@ class RuleConditionExpression extends ObjectModel
     const OPERATOR_IS_NOT_SET = '!ISSET';
     const OPERATOR_IN = 'IN';
     const OPERATOR_NOT_IN = '!IN';
-    const OPERATOR_NOT_CONTAIN = 'CONTAIN';
+    const OPERATOR_CONTAIN = 'CONTAIN';
+    const OPERATOR_NOT_CONTAIN = '!CONTAIN';
 
     /**
-     * @var string
+     * @var RuleConditionExpressionOperand
      */
-    public $conditionType;
+    public $left;
     /**
-     * @var string
+     * @var RuleConditionExpressionOperand
      */
-    public $key;
-    /**
-     * @var string|number|array|null
-     */
-    public $value;
+    public $right;
     /**
      * @var string
      */

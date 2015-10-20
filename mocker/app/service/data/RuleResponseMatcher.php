@@ -6,12 +6,12 @@
 class RuleResponseMatcher
 {
 
-    public function match($rule, $params, $headers)
+    public function match($rule, $contextMap)
     {
         $condition = null;
         if ($rule->conditions) {
             foreach ($rule->conditions as $rc) {
-                if ($this->matchRuleCondition($rc, $params, $headers)) {
+                if ($this->matchRuleCondition($rc, $contextMap)) {
                     return $rc->res;
                 }
             }
@@ -21,15 +21,14 @@ class RuleResponseMatcher
 
     /**
      * @param RuleCondition $condition
-     * @param array $params
-     * @param array $headers
+     * @param array $contextMap
      * @return bool
      */
-    private function matchRuleCondition($condition, $params, $headers)
+    private function matchRuleCondition($condition, $contextMap)
     {
         if(is_array($condition->expressions)){
             foreach($condition->expressions as $exp){
-                if($this->matchRuleConditionExpression($exp, $params, $headers)){
+                if($this->matchRuleConditionExpression($exp, $contextMap)){
                     if ($condition->logicType == RuleCondition::LOGIC_TYPE_OR) {
                         return true;
                     }
@@ -47,20 +46,11 @@ class RuleResponseMatcher
 
     /**
      * @param RuleConditionExpression $rce
-     * @param array $params
-     * @param array $headers
+     * @param array $contextMap
      * @return bool
      */
-    private function matchRuleConditionExpression($rce, $params, $headers){
-        $context = null;
-        if($rce->conditionType == RuleConditionExpression::CONDITION_TYPE_PARAM){
-            $context = $params;
-        }else if($rce->conditionType == RuleConditionExpression::CONDITION_TYPE_HEADER){
-            $context = $headers;
-        }else{
-            throw new MockApiException("unsupported condition type '" . $rce->conditionType . '"', ErrorInfo::UNSUPPORTED_CONDITION_TYPE);
-        }
+    private function matchRuleConditionExpression($rce, $contextMap){
         $engine = new RuleConditionExpressionEngine();
-        return boolval($engine->evaluate($rce, $context));
+        return boolval($engine->evaluate($rce, $contextMap));
     }
 }

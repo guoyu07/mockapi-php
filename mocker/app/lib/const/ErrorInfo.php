@@ -22,9 +22,9 @@ class ErrorInfo
      */
     const ERROR_NO_DATA_NOT_FOUND = 1002;
     /**
-     * 错误码：不支持的条件类型
+     * 错误码：不支持的上下文类型
      */
-    const UNSUPPORTED_CONDITION_TYPE = 2001;
+    const UNSUPPORTED_CONTEXT_TYPE = 2001;
 
     /**
      * 错误码：不支持的条件操作符
