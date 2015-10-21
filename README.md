@@ -4,7 +4,7 @@ This application provide mock api service for web developers, and it's written w
 
 ## Original intention
 * Front engineer can debug code when backend engineer's code has not be ready.
-* Base dependent service down. Like login service.
+* Business system can run normally even dependent base service down. Like login service.
 * For fun. :)
 
 ## Runtime
@@ -119,7 +119,7 @@ You need export **MONGODB_HOME** in your **rc** file. e.g. `~/.bashrc`.
    Test data is in [mockapi_rule.txt](mockapi_rule.txt). Insert this data into mongodb.
 
 ## Url
-### test url for mockapi
+### test url for mocker
     http://127.0.0.1:8800/testin
     http://127.0.0.1:8800/testempty
     http://127.0.0.1:8800/testisset
