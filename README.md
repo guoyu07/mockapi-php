@@ -56,8 +56,8 @@ Modify `$NGINX_HOME/conf/nginx.conf`.
         include        fastcgi_params;
     }
 ### Apache config
+First step. Enable Mod Rewrite module and Mod VhostAlias.  
 Modify `$APACHE_HOME/conf/httpd.conf`.  
-First step enable Mod Rewrite module and Mod VhostAlias.
 
     LoadModule rewrite_module modules/mod_rewrite.so  
     LoadModule vhost_alias_module modules/mod_vhost_alias.so  
@@ -65,7 +65,7 @@ First step enable Mod Rewrite module and Mod VhostAlias.
     # Virtual hosts  
     Include conf/extra/httpd-vhosts.conf
 
-Second step you shoud enable set `AllowOverride All` for mockapi directory.
+Second step. Set `AllowOverride All` for mockapi directory.
 
     <Directory "d:/wamp/www/">
         Options Indexes FollowSymLinks
@@ -74,7 +74,7 @@ Second step you shoud enable set `AllowOverride All` for mockapi directory.
         Allow from all
     </Directory>
 
-Third step add vhost in httpd-vhosts.conf:
+Third step. Add vhost in `httpd-vhosts.conf`:
 
     <VirtualHost *:8800>
         ServerAdmin webmaster@dummy-host.example.com
