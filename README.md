@@ -57,11 +57,15 @@ Modify `$NGINX_HOME/conf/nginx.conf`.
     }
 ### Apache config
 Modify `$APACHE_HOME/conf/httpd.conf`.  
-First you should enable Mod Rewrite module . Just remove '#' for this line:
+First step enable Mod Rewrite module and Mod VhostAlias.
 
-    LoadModule rewrite_module modules/mod_rewrite.so
+    LoadModule rewrite_module modules/mod_rewrite.so  
+    LoadModule vhost_alias_module modules/mod_vhost_alias.so  
+    ...  
+    # Virtual hosts  
+    Include conf/extra/httpd-vhosts.conf
 
-Second you shoud enable set `AllowOverride All` for mockapi directory.
+Second step you shoud enable set `AllowOverride All` for mockapi directory.
 
     <Directory "d:/wamp/www/">
         Options Indexes FollowSymLinks
@@ -70,6 +74,24 @@ Second you shoud enable set `AllowOverride All` for mockapi directory.
         Allow from all
     </Directory>
 
+Third step add vhost in httpd-vhosts.conf:
+
+    <VirtualHost *:8800>
+        ServerAdmin webmaster@dummy-host.example.com
+        DocumentRoot "D:/wamp/www/mockapi/mocker"
+        ServerName mocker.mockapi.com
+        ErrorLog "logs/mockapi.mocker-error.log"
+        CustomLog "logs/mockapi.mocker-access.log" common
+    </VirtualHost>
+    <VirtualHost *:8900>
+        ServerAdmin webmaster@dummy-host2.example.com
+        DocumentRoot "D:/wamp/www/mockapi/workshop"
+        ServerName workshop.mockapi.com
+        ErrorLog "logs/mockapi.workshop-error.log"
+        CustomLog "logs/mockapi.workshop-access.log" common
+    </VirtualHost>
+    
+    
 ### Command for mongodb
 #### shell on linux
 
@@ -94,5 +116,21 @@ You need export **MONGODB_HOME** in your **rc** file. e.g. `~/.bashrc`.
     
 
 ## Test Data
-   see [mockapi_rule.txt](mockapi_rule.txt)
+   Test data is in [mockapi_rule.txt](mockapi_rule.txt). Insert this data into mongodb.
 
+## Url
+### test url for mockapi
+    http://127.0.0.1:8800/testin
+    http://127.0.0.1:8800/testempty
+    http://127.0.0.1:8800/testisset
+    http://127.0.0.1:8800/testless
+    http://127.0.0.1:8800/testgrater
+    http://127.0.0.1:8800/testequals
+    http://127.0.0.1:8800/testcontain
+### url for workshop
+    http://127.0.0.1:8900/rule/list
+    http://127.0.0.1:8900/rule/add
+    http://127.0.0.1:8900/rule/modify
+    http://127.0.0.1:8900/rule/remove
+    http://127.0.0.1:8900/rule/saveRuleCondition
+    http://127.0.0.1:8900/rule/removeRuleCondition
