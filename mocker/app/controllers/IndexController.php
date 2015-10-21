@@ -11,5 +11,6 @@ class IndexController extends BaseController
         $pageService = new IndexPageService($this->request, $this->response);
         $pageService->setUrl($url);
         $pageService->execute();
+        $this->render($pageService);
     }
 }

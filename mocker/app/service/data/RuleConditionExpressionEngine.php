@@ -42,7 +42,7 @@ class RuleConditionExpressionEngine
             if($operand->isVariable){
                 $context = $contextMap[$operand->contextType];
                 if(!isset($context)){
-                    throw new MockApiException("unsupported context type '" . $operand->contextType . '"', ErrorInfo::UNSUPPORTED_CONTEXT_TYPE);
+                    throw new MockApiException('unsupported context type [' . $operand->contextType . ']', ErrorInfo::UNSUPPORTED_CONTEXT_TYPE);
                 }
                 return $context[$operand->value];
             }

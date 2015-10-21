@@ -19,6 +19,6 @@ class IsNotSetEvaluator extends IssetEvaluator
      */
     public function getOperator()
     {
-        return 'ISSET';
+        return '!ISSET';
     }
 }

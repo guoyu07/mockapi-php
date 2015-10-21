@@ -8,7 +8,6 @@ class RuleResponseMatcher
 
     public function match($rule, $contextMap)
     {
-        $condition = null;
         if ($rule->conditions) {
             foreach ($rule->conditions as $rc) {
                 if ($this->matchRuleCondition($rc, $contextMap)) {

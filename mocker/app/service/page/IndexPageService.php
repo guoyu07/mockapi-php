@@ -27,12 +27,13 @@ class IndexPageService extends BasePageService
             );
             $matcher = new RuleResponseMatcher();
             foreach ($rules as $rule) {
-                if ($matcher->match($rule, $contextMap)) {
-                    if (is_array($rule->res) || is_object($rule->res)) {
+                $res = $matcher->match($rule, $contextMap);
+                if (isset($res)) {
+                    if (is_array($res) || is_object($res)) {
                         $this->setReturnType(self::RETURN_TYPE_JSON);
                         return $this->success($rule->res);
                     } else {
-                        return $rule->res;
+                        return $res;
                     }
                 }
             }

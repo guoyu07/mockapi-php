@@ -91,4 +91,8 @@ You need export **MONGODB_HOME** in your **rc** file. e.g. `~/.bashrc`.
 `startup.bat`
 
     "C:\Program Files\MongoDB\Server\3.0\bin\mongod.exe" --smallfiles --config "C:\Program Files\MongoDB\Server\3.0\conf\mongo.conf"
+    
+
+## Test Data
+   see [mockapi_rule.txt](mockapi_rule.txt)
 

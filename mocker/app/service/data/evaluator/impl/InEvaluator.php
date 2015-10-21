@@ -14,9 +14,6 @@ class InEvaluator implements IExpressionEvaluator
         $left = $expression->getLeft();
         $right = $expression->getRight();
         if(isset($left) && isset($right)){
-            if(is_string($left)){
-                $left = explode(',', $left);
-            }
             if(is_string($right)){
                 $right = explode(',', $right);
             }else if(!is_array($right)){

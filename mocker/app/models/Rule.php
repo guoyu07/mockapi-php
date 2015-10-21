@@ -45,9 +45,7 @@ class Rule extends BaseModel
      * @param $rule
      */
     public static function covertToFullObject(&$rule){
-        $id= array();
-        ObjectUtil::copyProperties($rule->_id, $id);
-        $rule->_id = $id['$id'];
+        $rule->_id = $rule->_id->{'$id'};
         if(is_array($rule->conditions)){
             foreach($rule->conditions as $idx => $rc){
                 $ruleCondition = RuleCondition::create($rc);

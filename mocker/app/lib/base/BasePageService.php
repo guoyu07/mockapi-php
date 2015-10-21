@@ -116,6 +116,7 @@ abstract class BasePageService
             $this->checkParams($this->properties, $this->getParamRules());
             $this->returnData = $this->doExecute();
         }catch (\Exception $e){
+            $this->returnType = self::RETURN_TYPE_JSON;
             $this->returnData = $this->error($e->getCode(), $e->getMessage());
         }
     }

@@ -18,9 +18,9 @@ try {
         APP_PATH . 'app/lib/const/',
         APP_PATH . 'app/lib/util/',
         APP_PATH . 'app/service/page/',
-        APP_PATH . 'app/data/',
-        APP_PATH . 'app/data/evaluator/',
-        APP_PATH . 'app/data/evaluator/impl/',
+        APP_PATH . 'app/service/data/',
+        APP_PATH . 'app/service/data/evaluator/',
+        APP_PATH . 'app/service/data/evaluator/impl/',
     ))->register();
 
     // Create a DI
