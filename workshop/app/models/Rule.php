@@ -14,9 +14,9 @@ class Rule extends BaseModel
      */
     public $conditions;
     /**
-     * @var array
+     * @var string
      */
-    public $groups;
+    public $group;
     /**
      * @var array
      */
