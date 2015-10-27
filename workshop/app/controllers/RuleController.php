@@ -8,6 +8,13 @@ class RuleController extends BaseController
         echo 'hello';
     }
 
+    public function findByIdAction()
+    {
+        $pageService = new FindRuleByIdPageService($this->request, $this->response);
+        $pageService->execute();
+        $this->render($pageService);
+    }
+
     public function listAction()
     {
         $pageService = new ListRulePageService($this->request, $this->response);

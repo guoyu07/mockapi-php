@@ -9,13 +9,21 @@ class IndexPageService extends BasePageService
      * @var string
      */
     private $url;
+    /**
+     * @var string
+     */
+    private $group;
 
     protected function doExecute()
     {
+        $params = array(
+            'url' => $this->url,
+        );
+        if ($this->group) {
+            $params['group'] = $this->group;
+        }
         $rules = Rule::find(array(
-            array(
-                'url' => $this->url,
-            )
+            $params,
         ));
         if ($rules) {
             $contextMap = array(
@@ -58,5 +66,20 @@ class IndexPageService extends BasePageService
         $this->url = $url;
     }
 
+    /**
+     * @return string
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * @param string $group
+     */
+    public function setGroup($group)
+    {
+        $this->group = $group;
+    }
 
 }
