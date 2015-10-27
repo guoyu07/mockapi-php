@@ -134,3 +134,27 @@ You need export **MONGODB_HOME** in your **rc** file. e.g. `~/.bashrc`.
     http://127.0.0.1:8900/rule/remove
     http://127.0.0.1:8900/rule/saveRuleCondition
     http://127.0.0.1:8900/rule/removeRuleCondition
+
+## Group
+We use group to implement multiple users use same url but would't disturb others. You can set http header `http_mockapi_group` to specify the group which you want. A sample way to set http header is that use http proxy server, such as `nginx`.
+
+### Nginx Proxy Example
+add a server in nginx.conf. Just like this:
+    
+    server {
+        listen 8008;
+        location /{
+            # address of mock
+            proxy_pass http://127.0.0.1:8800/;
+            # set group name with 'rd'
+            proxy_set_header mockapi-group rd;
+            
+            proxy_redirect off; 
+            proxy_set_header Host $http_host; 
+            proxy_set_header X-Real-IP $remote_addr; 
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; 
+            proxy_set_header Cookie $http_cookie; 
+        }
+     }
+
+Then you can use the `http://127.0.0.1:8008/testcontain` and `http://127.0.0.1:8008/testequals` to verify the group.
