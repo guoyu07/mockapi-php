@@ -144,7 +144,7 @@ add a server in nginx.conf. Just like this:
     server {
         listen 8008;
         location /{
-            # address of mock
+            # address of mocker
             proxy_pass http://127.0.0.1:8800/;
             # set group name with 'rd'
             proxy_set_header mockapi-group rd;
