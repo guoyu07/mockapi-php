@@ -26,11 +26,15 @@ class AddRulePageService extends JsonPageService
         if (empty($rule->res)) {
             throw new MockApiException('res is not set', ErrorInfo::ERROR_NO_INVALID_PARAM);
         }
+        $condition = array('url' => $rule->url,);
+        if($rule->group){
+            $condition['group'] = $rule->group;
+        }
         $list = Rule::find(array(
-            array('url' => $rule->url)
+            $condition,
         ));
         if (!empty($list)) {
-            throw new MockApiException('rule has been existed', ErrorInfo::ERROR_NO_INVALID_PARAM);
+            throw new MockApiException('rule has been existed'. ($rule->group ? ' in group [' . $rule->group . ']' : ''), ErrorInfo::ERROR_NO_INVALID_PARAM);
         }
     }
 
