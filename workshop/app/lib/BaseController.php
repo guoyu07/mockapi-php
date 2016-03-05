@@ -7,7 +7,7 @@ use Phalcon\Mvc\Controller;
 class BaseController extends Controller
 {
     /**
-     * äÖÈ¾Êı¾İ
+     * ï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½
      * @param BasePageService $pageService
      */
     public function render($pageService){
@@ -20,6 +20,7 @@ class BaseController extends Controller
                 }else{
                     echo json_encode($pageService->getReturnData());
                 }
+                $this->view->disable();
                 break;
             default :
                 echo $pageService->getReturnData();

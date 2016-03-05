@@ -5,7 +5,7 @@ class RuleController extends BaseController
 
     public function indexAction()
     {
-        echo 'hello';
+        $this->view->pick('rule/list');
     }
 
     public function findByIdAction()
