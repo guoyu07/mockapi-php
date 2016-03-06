@@ -1,5 +1,4 @@
 <?php
-use Phalcon\Config\Adapter\Ini as ConfigIni;
 /**
  * Class DisplayController
  */
@@ -26,8 +25,8 @@ class DisplayController extends BaseController
     }
 
     public function previewAction(){
+        $config = $this->di->get('config');
         $url = $this->request->get('url');
-        $config = new ConfigIni(APP_PATH . "app/conf/mocker.ini");
         header('location:' . $config->mocker->url . $url);
         $this->view->disable();
     }
