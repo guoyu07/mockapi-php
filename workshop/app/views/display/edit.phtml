@@ -1,0 +1,108 @@
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="tabbable">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active">
+                        <a data-toggle="tab" href="#basicSettings">
+                            <i class="green icon-cog bigger-110"></i>
+                            基本设置
+                        </a>
+                    </li>
+
+                    <li>
+                        <a data-toggle="tab" href="#advancedSettings">
+                            高级条件设置
+                            <i class="green icon-cogs bigger-110"></i>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="basicSettings" class="tab-pane in active">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="inputUrl"> 请求路径 </label>
+
+                                <div class="col-sm-9">
+                                    <span class="input-icon input-icon-right" style="display:inline">
+                                        <input type="url" id="inputUrl" placeholder="url" class="col-xs-10 col-sm-5"
+                                               style="ime-mode: disabled ;" required="required"/>
+                                        <i class="icon-asterisk red"></i>
+                                    </span>
+                                    <span class="help-inline col-xs-12 col-sm-7">
+                                        <span class="middle">必填，URI格式，以<span style="color:red"><strong>/</strong></span>打头，如/hello/world，勿带参数</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="inputGroup"> 分组名称 </label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" id="inputGroup" placeholder="group" class="col-xs-10 col-sm-5"/>
+                                    <span class="help-inline col-xs-12 col-sm-7">
+                                        <span class="middle">可选，英文字母、数字、下划线、中横线</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="inputJsonp"> JSONP回调函数 </label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" id="inputJsonp" placeholder="callback" class="col-xs-10 col-sm-5"/>
+                                    <span class="help-inline col-xs-12 col-sm-7">
+                                        <span class="middle">可选，英文字母、数字、下划线</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="textareaResponse">
+                                    响应内容 </label>
+
+                                <div class="col-sm-8">
+                                    <span class="input-icon input-icon-right" style="display: inline-block;width: 100%">
+                                    <textarea id="textAreaResponse" class="autosize-transition form-control" required="required"></textarea>
+                                        <i class="icon-asterisk red"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="advancedSettings" class="tab-pane">
+
+                    </div>
+                </div>
+
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-info" type="button" id="btnSave">
+                            <i class="icon-ok bigger-110"></i>
+                            保存
+                        </button>
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btn" type="reset" id="btnReset">
+                            <i class="icon-undo bigger-110"></i>
+                            Reset
+                        </button>
+                    </div>
+                </div>
+
+                <div class="alert alert-danger hidden" id="alertError">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="icon-remove"></i>
+                    </button>
+
+                    <strong id="strongMessage">
+                        dddd
+                    </strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="app/js/rule.js"></script>
+<script src="app/js/edit.js"></script>

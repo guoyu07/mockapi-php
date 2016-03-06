@@ -6,7 +6,7 @@
 class HttpUtils
 {
     /**
-     * »ñÈ¡Http Header
+     * è·å–Http Header
      * @return array
      */
     public static function getHttpHeaders()

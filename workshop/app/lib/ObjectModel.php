@@ -5,8 +5,8 @@
 abstract class ObjectModel
 {
     /**
-     * ´´½¨¸ÃÀàĞÍµÄÊµÀı£¬²¢´ÓÖ¸¶¨¶ÔÏó»òÊı×éÉÏ¸´ÖÆÊôĞÔ
-     * @param object|array $src Ô­Ê¼¶ÔÏó»òÊı×é
+     * åˆ›å»ºè¯¥ç±»å‹çš„å®ä¾‹ï¼Œå¹¶ä»æŒ‡å®šå¯¹è±¡æˆ–æ•°ç»„ä¸Šå¤åˆ¶å±æ€§
+     * @param object|array $src åŸå§‹å¯¹è±¡æˆ–æ•°ç»„
      * @return object
      */
     static function create($src){

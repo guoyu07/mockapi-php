@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="/">
     <meta charset="utf-8" />
     <title> MockAPI WorkShop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -83,11 +84,7 @@
     <script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
     <script src="assets/js/jquery.slimscroll.min.js"></script>
-    <script src="assets/js/jquery.easy-pie-chart.min.js"></script>
-    <script src="assets/js/jquery.sparkline.min.js"></script>
-    <script src="assets/js/flot/jquery.flot.min.js"></script>
-    <script src="assets/js/flot/jquery.flot.pie.min.js"></script>
-    <script src="assets/js/flot/jquery.flot.resize.min.js"></script>
+    <script src="assets/js/jquery.autosize.min.js"></script>
 
     <!-- ace scripts -->
 
@@ -95,6 +92,8 @@
     <script src="assets/js/ace.min.js"></script>
     <script src="assets/js/bootbox.min.js"></script>
     <script src="app/common/util.js"></script>
+    <script src="app/common/config.js"></script>
+    <script src="app/common/app.js"></script>
 </head>
 
 <body>
@@ -107,7 +106,7 @@
         <div class="navbar-header pull-left">
             <a href="#" class="navbar-brand">
                 <small>
-                    <i class="icon-leaf"></i>
+                    <i class="icon-beaker"></i>
                     MockAPI WorkShop
                 </small>
             </a><!-- /.brand -->
@@ -134,14 +133,14 @@
 
 
                 <li>
-                    <a href="/rule" class="dropdown-toggle">
+                    <a href="/display/list" class="dropdown-toggle">
                         <i class="icon-list"></i>
                         <span class="menu-text"> 规则列表 </span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#" class="dropdown-toggle">
+                    <a href="/display/edit?mode=1" class="dropdown-toggle">
                         <i class="icon-edit"></i>
                         <span class="menu-text"> 新建规则 </span>
                     </a>

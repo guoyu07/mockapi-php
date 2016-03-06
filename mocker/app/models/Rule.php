@@ -25,6 +25,10 @@ class Rule extends BaseModel
      * @var string
      */
     public $tag;
+    /**
+     * @var string
+     */
+    public $jsonp;
 
     protected static function _getResultset($params, Phalcon\Mvc\CollectionInterface $collection, $connection, $unique) {
         $resultSet = parent::_getResultset($params, $collection, $connection, $unique);

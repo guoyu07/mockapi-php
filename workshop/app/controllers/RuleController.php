@@ -2,12 +2,6 @@
 
 class RuleController extends BaseController
 {
-
-    public function indexAction()
-    {
-        $this->view->pick('rule/list');
-    }
-
     public function findByIdAction()
     {
         $pageService = new FindRuleByIdPageService($this->request, $this->response);

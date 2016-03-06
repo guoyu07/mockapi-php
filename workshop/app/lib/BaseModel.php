@@ -1,12 +1,12 @@
 <?php
 /**
- * Class BaseModel Ä£ÐÍ»ùÀà
+ * Class BaseModel æ¨¡åž‹åŸºç±»
  */
 class BaseModel extends \Phalcon\Mvc\Collection
 {
     /**
-     * ´´½¨¸ÃÀàÐÍµÄÊµÀý£¬²¢´ÓÖ¸¶¨¶ÔÏó»òÊý×éÉÏ¸´ÖÆÊôÐÔ
-     * @param object|array $src Ô­Ê¼¶ÔÏó»òÊý×é
+     * åˆ›å»ºè¯¥ç±»åž‹çš„å®žä¾‹ï¼Œå¹¶ä»ŽæŒ‡å®šå¯¹è±¡æˆ–æ•°ç»„ä¸Šå¤åˆ¶å±žæ€§
+     * @param object|array $src åŽŸå§‹å¯¹è±¡æˆ–æ•°ç»„
      * @return object
      */
     static function create($src){

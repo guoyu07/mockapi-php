@@ -59,5 +59,9 @@ var Util = {
         var isLast = true, indent = 0;
         notify('', data, isLast, indent, false);
         return draw.join('');
+    },
+
+    isUri: function(str){
+        return /^\/([\w\-\_/])+$/.test(str);
     }
 };

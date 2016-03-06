@@ -3,8 +3,8 @@
 class ObjectUtil
 {
     /**
-     * @param object|array $src Ô­Ê¼¶ÔÏó»òÊı×é
-     * @param object|array $target Ä¿±ê¶ÔÏó
+     * @param object|array $src åŸå§‹å¯¹è±¡æˆ–æ•°ç»„
+     * @param object|array $target ç›®æ ‡å¯¹è±¡
      */
     static function copyProperties($src, &$target)
     {
@@ -20,8 +20,8 @@ class ObjectUtil
     }
 
     /**
-     * Éú³ÉÈ«¾ÖÎ¨Ò»µÄid
-     * @param bool $opt ÊÇ·ñÔÚ±»»¨À¨ºÅ°üÎ§
+     * ç”Ÿæˆå…¨å±€å”¯ä¸€çš„id
+     * @param bool $opt æ˜¯å¦åœ¨è¢«èŠ±æ‹¬å·åŒ…å›´
      * @return string
      */
     static function guid($opt = false)  //  Set to true/false as your default way to do this.

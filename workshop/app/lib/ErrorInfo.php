@@ -6,19 +6,19 @@
 class ErrorInfo
 {
     /**
-     * ´íÎóÂë£º³É¹¦
+     * é”™è¯¯ç ï¼šæˆåŠŸ
      */
     const ERROR_NO_SUCCESS = 0;
     /**
-     * ´íÎóÂë£º²ÎÊýÎÞÐ§
+     * é”™è¯¯ç ï¼šå‚æ•°æ— æ•ˆ
      */
     const ERROR_NO_INVALID_PARAM = 1000;
     /**
-     * ´íÎóÂë£ºÊý¾Ý¿â²Ù×÷Ê§°Ü
+     * é”™è¯¯ç ï¼šæ•°æ®åº“æ“ä½œå¤±è´¥
      */
     const ERROR_NO_DB_OPERATION_ERROR = 1001;
     /**
-     * ´íÎóÂë£ºÊý¾Ý²»´æÔÚ
+     * é”™è¯¯ç ï¼šæ•°æ®ä¸å­˜åœ¨
      */
     const ERROR_NO_DATA_NOT_FOUND = 1002;
 }

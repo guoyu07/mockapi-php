@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class RuleConditionExpression ¹æÔòÌõ¼þ±í´ïÊ½Ä£ÐÍ
+ * Class RuleConditionExpression è§„åˆ™æ¡ä»¶è¡¨è¾¾å¼æ¨¡åž‹
  */
 class RuleConditionExpression extends ObjectModel
 {

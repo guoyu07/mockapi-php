@@ -1,15 +1,15 @@
 <?php
 /**
- * Class RuleCondition 规则条件模型
+ * Class RuleCondition 瑙勫垯鏉′欢妯″瀷
  */
 class RuleCondition extends ObjectModel
 {
     /**
-     * 逻辑类型：与
+     * 閫昏緫绫诲瀷锛氫笌
      */
     const LOGIC_TYPE_AND = 'AND';
     /**
-     * 逻辑类型：或
+     * 閫昏緫绫诲瀷锛氭垨
      */
     const LOGIC_TYPE_OR = 'OR';
 

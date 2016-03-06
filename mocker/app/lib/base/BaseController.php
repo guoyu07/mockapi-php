@@ -1,5 +1,6 @@
 <?php
 use Phalcon\Mvc\Controller;
+use \Phalcon\Mvc\View;
 
 /**
  * Class BaseController
@@ -7,7 +8,7 @@ use Phalcon\Mvc\Controller;
 class BaseController extends Controller
 {
     /**
-     * äÖÈ¾Êı¾İ
+     * æ¸²æŸ“æ•°æ®
      * @param BasePageService $pageService
      */
     public function render($pageService){
@@ -20,6 +21,8 @@ class BaseController extends Controller
                 }else{
                     echo json_encode($pageService->getReturnData());
                 }
+                $this->view->disable();
+                $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
                 break;
             default :
                 echo $pageService->getReturnData();

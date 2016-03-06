@@ -1,28 +1,58 @@
-(function ($, bootbox) {
+(function ($, bootbox, Util, Config, App) {
     var page = {el: {}, func: {}};
     $(function () {
         page.func.init = function () {
             page.el.searchText = $('#nav-search-input');
             page.el.listTable = $('#listTable');
             page.el.listTableTbody = $('#listTable tbody');
+            page.el.searchText.val(Util.getQueryStringByName('url'));
         };
 
-        page.func.bindEvent = function(){
-            page.el.searchText.on('keydown', function(e){
-                if(e.which == 13){
-                    page.func.doQuery(1);
+        page.func.bindEvent = function () {
+            $('table th input:checkbox').on('click', function () {
+                var that = this;
+                $(this).closest('table').find('tr > td:first-child input:checkbox')
+                    .each(function () {
+                        this.checked = that.checked;
+                        $(this).closest('tr').toggleClass('selected');
+                    });
+
+            });
+
+            page.el.searchText.on('keydown', function (e) {
+                if (e.which == 13) {
+                    page.func.doQuery();
                 }
             });
 
-            page.el.listTableTbody.on("click", "a.delete-rule",function(e) {
+            page.el.listTableTbody.on("click", "a.delete-rule", function (e) {
                 var target = $(e.target);
                 var tds = target.parents('tr').children('td');
                 var bgColor = tds.first().css('background-color');
                 tds.css({'background-color': '#FF0000'});
-                bootbox.confirm('确定删除规则 <span style="color: #ff0000;font-weight: bold;">' + target.attr('data') + '</span> ?', function(result) {
-                    if(result) {
-                        alert('删除成功');
-                    }else{
+                var id = target.attr('data');
+                App.showConfirmDialog('确定删除规则 <span style="color: #ff0000;font-weight: bold;">' + id + '</span> ?', function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: Config.url.removeRule,
+                            type: 'post',
+                            dataType: 'json',
+                            data: {
+                                '_id': id
+                            },
+                            success: function (resp) {
+                                if (resp.error == 0) {
+                                    App.showSuccessDialog('删除成功');
+                                    page.func.doQuery();
+                                } else {
+                                    App.showErrorDialog('删除失败：' + resp.message);
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                page.func.showErrorDialog('删除失败：' + (status ? status : error));
+                            }
+                        });
+                    } else {
                         tds.css({'background-color': bgColor});
                     }
                 });
@@ -36,13 +66,13 @@
          */
         page.func.query = function (conditions, cbk) {
             $.ajax({
-                url: 'rule/list',
+                url: Config.url.listRule,
                 type: 'post',
                 dataType: 'json',
                 data: conditions,
-                success: function (data) {
-                    if (data && data.error == 0 && data.data && data.data.list) {
-                        cbk(data.data.list);
+                success: function (resp) {
+                    if (resp && resp.error == 0 && resp.data && resp.data.list) {
+                        cbk(resp.data.list);
                     } else {
                         cbk(null);
                     }
@@ -67,8 +97,9 @@
                     row.append('<td>' + (item.group === null ? '' : item.group) + '</td>');
                     row.append('<td>' +
                         '<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">' +
-                        '<a class="green edit-rule" title="编辑" href="#" data="' + item['_id'] + '"><i class="icon-pencil bigger-130" data="' + item['_id'] + '"></i></a>' +
-                        '<a class="red delete-rule" title="删除" href="#" data="' + item['_id'] + '"><i class="icon-trash bigger-130" data="' + item['_id'] + '"></i></a>' +
+                        '<a class="green edit-rule" title="编辑" href="/display/edit?mode=2&_id=' + item['_id'] + '" data="' + item['_id'] + '"><i class="icon-pencil bigger-130" data="' + item['_id'] + '"></i></a>' +
+                        '<a class="blue copy-rule" title="复制" href="/display/edit?mode=3&_id=' + item['_id'] + '" data="' + item['_id'] + '"><i class="icon-copy bigger-130" data="' + item['_id'] + '"></i></a>' +
+                        '<a class="red delete-rule" title="删除" href="javascript:void();" data="' + item['_id'] + '"><i class="icon-trash bigger-130" data="' + item['_id'] + '"></i></a>' +
                         '</div>' +
                         '</td>');
                     page.el.listTableTbody.append(row);
@@ -79,11 +110,8 @@
         /**
          * 执行查询
          */
-        page.func.doQuery = function (mode) {
-            var url = Util.getQueryStringByName('url');
-            if (mode == 1) {
-                url = page.el.searchText.val();
-            }
+        page.func.doQuery = function () {
+            var url = page.el.searchText.val();
             page.func.query({
                     url: url
                 },
@@ -94,4 +122,4 @@
         page.func.bindEvent();
         page.func.doQuery();
     });
-})(jQuery, bootbox);
+})(jQuery, bootbox, Util, Config, App);
