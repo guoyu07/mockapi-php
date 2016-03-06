@@ -8,6 +8,9 @@ class ModifyRulePageService extends JsonPageService
     function doExecute()
     {
         $rule = Rule::create($this->get('rule'));
+        if($rule->group === ''){
+            $rule->group = null;
+        }
         $this->beforeSave($rule);
         $ret = $rule->save($rule);
         if ($ret) {

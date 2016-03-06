@@ -1,3 +1,19 @@
+<div class="breadcrumbs" id="breadcrumbs">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('breadcrumbs', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-edit home-icon" id="pageIcon"></i>
+            <span id="pageName"></span>
+        </li>
+    </ul>
+</div>
+
 <div class="page-content">
     <div class="row">
         <div class="col-xs-12">
@@ -48,10 +64,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="inputJsonp"> JSONP回调函数 </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="inputJsonp">
+                                    JSONP回调函数 </label>
 
                                 <div class="col-sm-9">
-                                    <input type="text" id="inputJsonp" placeholder="callback" class="col-xs-10 col-sm-5"/>
+                                    <input type="text" id="inputJsonp" placeholder="callback"
+                                           class="col-xs-10 col-sm-5"/>
                                     <span class="help-inline col-xs-12 col-sm-7">
                                         <span class="middle">可选，英文字母、数字、下划线</span>
                                     </span>
@@ -64,7 +82,8 @@
 
                                 <div class="col-sm-8">
                                     <span class="input-icon input-icon-right" style="display: inline-block;width: 100%">
-                                    <textarea id="textAreaResponse" class="autosize-transition form-control" required="required"></textarea>
+                                    <textarea id="textAreaResponse" class="autosize-transition form-control"
+                                              required="required"></textarea>
                                         <i class="icon-asterisk red"></i>
                                     </span>
                                 </div>

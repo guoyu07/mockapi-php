@@ -2,6 +2,8 @@
     var page = {el: {}, func: {}, var: {}};
     $(function () {
         page.func.init = function () {
+            page.el.pageIcon = $('#pageIcon');
+            page.el.pageName = $('#pageName');
             page.el.inputUrl = $('#inputUrl');
             page.el.inputGroup = $('#inputGroup');
             page.el.inputGroup = $('#inputGroup');
@@ -16,9 +18,21 @@
 
             page.var.ruleId = Util.getQueryStringByName('_id');
             page.var.mode = Util.getQueryStringByName('mode');
-            if(page.var.mode != 1){
+            page.var.actionUrl = Config.url.addRule;
+            if(page.var.mode == 1){
+                page.el.pageIcon.addClass('icon-plus');
+                page.el.pageName.html('新建规则');
+            }else if(page.var.mode == 2){
+                page.el.pageIcon.addClass('icon-edit');
+                page.el.pageName.html('修改规则');
+                page.var.actionUrl = Config.url.modifyRule;
+                page.el.btnSave.prop('disabled', true);
+            }else if(page.var.mode == 3){
+                page.el.pageIcon.addClass('icon-copy');
+                page.el.pageName.html('复制规则');
                 page.el.btnSave.prop('disabled', true);
             }
+
         };
 
         page.func.bindEvent = function () {
@@ -32,7 +46,7 @@
                 page.func.clearMessage();
                 page.el.btnSave.prop('disabled', true);
                 $.ajax({
-                    url: (page.var.mode == 2) ? Config.url.modifyRule : Config.url.addRule,
+                    url: page.var.actionUrl,
                     type: 'post',
                     dataType: 'json',
                     data: {

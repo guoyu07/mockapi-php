@@ -9,6 +9,9 @@ class AddRulePageService extends JsonPageService
     function doExecute()
     {
         $rule = Rule::create($this->get('rule'));
+        if($rule->group === ''){
+            $rule->group = null;
+        }
         $this->beforeSave($rule);
         $ret = $rule->save();
         if ($ret) {
@@ -27,8 +30,10 @@ class AddRulePageService extends JsonPageService
             throw new MockApiException('res is not set', ErrorInfo::ERROR_NO_INVALID_PARAM);
         }
         $condition = array('url' => $rule->url,);
-        if($rule->group){
+        if($rule->group !== ''){
             $condition['group'] = $rule->group;
+        }else{
+            $condition['group'] = $rule->null;
         }
         $list = Rule::find(array(
             $condition,

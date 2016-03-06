@@ -19,8 +19,10 @@ class IndexPageService extends BasePageService
         $params = array(
             'url' => $this->url,
         );
-        if ($this->group) {
+        if ($this->group !== '') {
             $params['group'] = $this->group;
+        }else{
+            $params['group'] = null;
         }
         $rules = Rule::find(array(
             $params,
