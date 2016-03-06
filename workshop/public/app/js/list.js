@@ -97,6 +97,7 @@
                     row.append('<td>' + (item.group === null ? '' : item.group) + '</td>');
                     row.append('<td>' +
                         '<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">' +
+                        '<a class="purple preview-rule" title="预览" target="_blank" href="/display/preview?url=' + item['url'] + '" data="' + item['id'] + '"><i class="icon-eye-open bigger-130" data="' + item['_id'] + '"></i></a>' +
                         '<a class="green edit-rule" title="编辑" href="/display/edit?mode=2&_id=' + item['_id'] + '" data="' + item['_id'] + '"><i class="icon-pencil bigger-130" data="' + item['_id'] + '"></i></a>' +
                         '<a class="blue copy-rule" title="复制" href="/display/edit?mode=3&_id=' + item['_id'] + '" data="' + item['_id'] + '"><i class="icon-copy bigger-130" data="' + item['_id'] + '"></i></a>' +
                         '<a class="red delete-rule" title="删除" href="javascript:void();" data="' + item['_id'] + '"><i class="icon-trash bigger-130" data="' + item['_id'] + '"></i></a>' +
