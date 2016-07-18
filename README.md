@@ -49,12 +49,77 @@ mongodb 3.0.5
 ### Nginx config
 Modify `$NGINX_HOME/conf/nginx.conf`.
 
-    location / {
-        root html/mockapi;
-        fastcgi_pass   unix:/dev/shm/php-cgi_5.6.5.sock;
-        fastcgi_param  SCRIPT_FILENAME $document_root/public/index.php;
-        include        fastcgi_params;
+    server {
+        listen       8800;
+        server_name  localhost;
+        default_type  text/html;
+        server_name_in_redirect off;
+        fastcgi_intercept_errors on;
+        error_page 404  /404.html;
+        root html/mockapi/workshop;
+        index index.php;
+        try_files $uri $uri/ @rewrite;
+        
+        location @rewrite {
+            rewrite ^/(.*)$ /public/index.php?_url=/$1;
+        }
+        
+        location ~ (\.php$|/$) {
+            root html/mockapi/mocker;
+            fastcgi_index  /public/index.php;
+            fastcgi_pass   unix:/dev/shm/php-cgi_5.6.5.sock;
+            include        fastcgi_params;
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_param PATH_INFO $fastcgi_path_info;
+            fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        }
+        
+        location = /404.html {
+           return 200 "no no no....";
+           break;
+        }
+    } 
+    server {
+        listen       8810;
+        server_name  localhost;
+        default_type  text/html;
+        server_name_in_redirect off;
+        fastcgi_intercept_errors on;
+        error_page 404  /404.html;
+        root html/mockapi/workshop;
+        index index.php;
+        try_files $uri $uri/ @rewrite;
+        location @rewrite {
+            rewrite ^/(.*)$ /public/index.php?_url=/$1;
+        }
+        
+        location ~ (\.php$|/$) {
+            root html/mockapi/workshop;
+            fastcgi_index  /public/index.php;
+            fastcgi_pass   unix:/dev/shm/php-cgi_5.6.5.sock;
+            include        fastcgi_params;
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_param PATH_INFO $fastcgi_path_info;
+            fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        }
+        
+        location ~ \.(gif|jpg|png|js|css|woff|eot|ttf)$ {
+           root html/mockapi/workshop/public;
+        }
+        
+        location ~* \.(eot|otf|ttf|woff)$ {
+            add_header Access-Control-Allow-Origin *;
+            root html/mockapi/workshop/public;
+        }
+        
+        location = /404.html {
+           return 200 "no no no....";
+           break;
+        }
     }
+    
 ### Apache config
 First step. Enable Mod Rewrite module and Mod VhostAlias.  
 Modify `$APACHE_HOME/conf/httpd.conf`.  
